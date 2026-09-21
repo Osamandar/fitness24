@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: fitness24
+      POSTGRES_USER: fitness24
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U fitness24 -d fitness24"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg2://fitness24:${POSTGRES_PASSWORD:-change-me}@db:5432/fitness24
+      SECRET_KEY: ${SECRET_KEY:-change-me-secret}
+      QR_SECRET: ${QR_SECRET:-change-me-qr}
+      DEVICE_KEY: ${DEVICE_KEY:-change-me-device}
+      TZ: Europe/Moscow
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:

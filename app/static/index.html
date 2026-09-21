@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Фитнес-центр 24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main id="auth" class="auth" hidden>
+  <section class="auth-card">
+    <div class="brand-big"><span class="brand-num">24</span><span>Фитнес-центр<br>круглосуточно</span></div>
+    <form id="login-form" novalidate>
+      <h1>Вход</h1>
+      <label>Email<input name="email" type="email" autocomplete="username" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required></label>
+      <p class="form-error" id="login-error" role="alert"></p>
+      <button type="submit" class="btn-primary">Войти</button>
+      <p class="switch">Нет аккаунта? <button type="button" class="link" data-switch="register">Зарегистрироваться</button></p>
+    </form>
+    <form id="register-form" novalidate hidden>
+      <h1>Регистрация клиента</h1>
+      <label>ФИО<input name="full_name" required minlength="3"></label>
+      <label>Телефон<input name="phone" type="tel" placeholder="+79991234567" required></label>
+      <label>Email<input name="email" type="email" required></label>
+      <label>Пароль<input name="password" type="password" minlength="8" autocomplete="new-password" required>
+        <small>Не короче 8 символов, буквы и цифры</small></label>
+      <label class="check"><input name="pd_consent" type="checkbox" required>
+        Даю согласие на обработку персональных данных в соответствии с 152-ФЗ</label>
+      <p class="form-error" id="register-error" role="alert"></p>
+      <button type="submit" class="btn-primary">Создать аккаунт</button>
+      <p class="switch">Уже есть аккаунт? <button type="button" class="link" data-switch="login">Войти</button></p>
+    </form>
+  </section>
+</main>
+
+<div id="shell" class="shell" hidden>
+  <nav class="side">
+    <div class="brand"><span class="brand-num">24</span><span>Фитнес-центр</span></div>
+    <ul id="menu"></ul>
+    <div class="who"><span id="who-name"></span><span id="who-role" class="muted"></span>
+      <button id="logout" class="link">Выйти</button></div>
+  </nav>
+  <main id="view" class="view" tabindex="-1"></main>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app.js"></script>
+</body>
+</html>
